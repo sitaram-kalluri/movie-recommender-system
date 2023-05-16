@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 public class Movie {
 
     @Id
-    @GeneratedValue
     private int id;
     private String name;
     private String genre;
@@ -50,7 +49,8 @@ public class Movie {
         this.producer = producer;
     }
 
-    public Movie(String name, String genre, String producer) {
+    public Movie(int id, String name, String genre, String producer) {
+        this.id = id;
         this.name = name;
         this.genre = genre;
         this.producer = producer;
