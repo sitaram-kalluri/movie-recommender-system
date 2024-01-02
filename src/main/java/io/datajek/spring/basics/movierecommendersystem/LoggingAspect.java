@@ -1,9 +1,7 @@
 package io.datajek.spring.basics.movierecommendersystem;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -18,6 +16,12 @@ public class LoggingAspect {
     @Before("logBefore()")
     public void beforeAdvice() {
         System.out.println("Before UserAspect >>>>> ");
+    }
+
+    @AfterReturning(pointcut = "execution(* io.datajek.spring.basics.movierecommendersystem.controller..*(..))", returning = "retval")
+    public void logAfter(JoinPoint joinPoint, Object retval) {
+        System.out.println("After Aspect JoinPoint "+ joinPoint.toString());
+        System.out.println("After UserAspect >>>>>" + retval);
     }
 
 
