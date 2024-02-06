@@ -1,0 +1,30 @@
+name: deploy code on EC2
+
+on: workflow_dispatch
+
+permissions:  # added using https://github.com/step-security/secure-workflows
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install VPN
+        run: |
+          sudo apt update
+          sudo apt install -y openvpn openvpn-systemd-resolved
+          echo "${{secrets.HAWKS_BAY_OVPN}}" > client.ovpn
+
+      - name: Connect to VPN
+        uses: "kota65535/github-openvpn-connect-action@v2"
+        with:
+          config_file: .github/workflows/client.ovpn
+
+      - name: Connect to EC2
+        uses: appleboy/ssh-action@029f5b4aeeeb58fdfe1410a5d17f967dacf36262 # v1.0.3
+        with:
+          host: "172.16.6.152"
+          username: ubuntu
+          script: |
+            ls
