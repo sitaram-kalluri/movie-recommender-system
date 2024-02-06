@@ -16,11 +16,12 @@ jobs:
           sudo apt install -y openvpn openvpn-systemd-resolved
           echo "${{secrets.HAWKS_BAY_OVPN}}" > client.ovpn
           pwd
+          ls
 
       - name: Connect to VPN
         uses: "kota65535/github-openvpn-connect-action@v2"
         with:
-          config_file: .github/workflows/client.ovpn
+          config_file: /home/runner/work/movie-recommender-system/movie-recommender-system/client.ovpn
 
       - name: Connect to EC2
         uses: appleboy/ssh-action@029f5b4aeeeb58fdfe1410a5d17f967dacf36262 # v1.0.3
