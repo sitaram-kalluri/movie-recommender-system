@@ -24,9 +24,9 @@ jobs:
           config_file: /home/runner/work/movie-recommender-system/movie-recommender-system/client.ovpn
 
       - name: Connect to EC2
-        uses: appleboy/ssh-action@029f5b4aeeeb58fdfe1410a5d17f967dacf36262 # v1.0.3
-        with:
-          host: "172.16.6.152"
-          username: ubuntu
-          script: |
-            ls
+        run: |
+          ssh ubuntu@172.16.6.152
+
+      - name: List
+        run: |
+          ls
