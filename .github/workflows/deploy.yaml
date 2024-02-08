@@ -25,5 +25,4 @@ jobs:
 
       - name: Connect to EC2
         run: |
-          ssh -t ubuntu@172.16.6.152
-          ls
+          ssh -t ubuntu@172.16.6.152 ls
